@@ -47,6 +47,6 @@ pub enum FunType {
 
 #[derive(Debug, Args)]
 pub struct VisibilityCommand {
-    /// The name of the entity
-    pub name: String,
+    /// The id of the entity found with the list command
+    pub id: String,
 }

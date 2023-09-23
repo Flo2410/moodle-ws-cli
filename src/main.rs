@@ -35,11 +35,11 @@ async fn main() {
             }
 
             FunType::Hide(visibility_command) => {
-                println!("Hide course: {}", visibility_command.name)
+                println!("Hide course: {}", visibility_command.id)
             }
 
             FunType::Show(visibility_command) => {
-                println!("Show course: {}", visibility_command.name)
+                println!("Show course: {}", visibility_command.id)
             }
         },
 
@@ -68,11 +68,11 @@ async fn main() {
             }
 
             FunType::Hide(visibility_command) => {
-                println!("Hide grup: {}", visibility_command.name)
+                println!("Hide grup: {}", visibility_command.id)
             }
 
             FunType::Show(visibility_command) => {
-                println!("Show grup: {}", visibility_command.name)
+                println!("Show grup: {}", visibility_command.id)
             }
         },
     }
