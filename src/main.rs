@@ -26,10 +26,11 @@ async fn main() {
                 // Print list
                 for course in courses {
                     println!(
-                        "{} // {} // {}",
+                        "{} // {} // {} // {}",
                         course.id.unwrap(),
                         course.fullnamedisplay.unwrap(),
-                        course.coursecategory.unwrap()
+                        course.coursecategory.unwrap(),
+                        course.hidden.unwrap(),
                     );
                 }
             }
