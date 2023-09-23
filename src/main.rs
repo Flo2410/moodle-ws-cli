@@ -36,11 +36,21 @@ async fn main() {
             }
 
             FunType::Hide(visibility_command) => {
-                println!("Hide course: {}", visibility_command.id)
+                println!("Hide course: {}", visibility_command.id);
+                let res = set_course_visibility(&mut client, visibility_command.id, false).await;
+
+                if res.is_err() {
+                    println!("Error!");
+                }
             }
 
             FunType::Show(visibility_command) => {
-                println!("Show course: {}", visibility_command.id)
+                println!("Show course: {}", visibility_command.id);
+                let res = set_course_visibility(&mut client, visibility_command.id, true).await;
+
+                if res.is_err() {
+                    println!("Error!");
+                }
             }
         },
 
