@@ -80,13 +80,9 @@ pub async fn set_course_visibility<'a>(
     format!("block_myoverview_hidden_course_{}", course_id),
   );
 
-  let is_hidden;
-  match visibility {
-    true => is_hidden = "0",
-    false => is_hidden = "1",
+  if !visibility {
+    params.insert("preferences[0][value]".to_string(), "1".to_string());
   }
-
-  params.insert("preferences[0][value]".to_string(), is_hidden.to_string());
 
   let res = client.post("core_user_update_user_preferences", &params).await;
 
