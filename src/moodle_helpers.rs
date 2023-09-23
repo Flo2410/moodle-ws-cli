@@ -3,25 +3,41 @@ use moodle::client::MoodleClient;
 
 pub async fn get_enrolled_courses<'a>(
     client: &'a mut MoodleClient,
-) -> Result<Vec<get_enrolled_courses_by_timeline_classification::ReturnsCoursesItem>, ()> {
-    // Get course list
-    let result = get_enrolled_courses_by_timeline_classification::call(
+) -> anyhow::Result<Vec<get_enrolled_courses_by_timeline_classification::ReturnsCoursesItem>> {
+    // Get shown courses
+    let res_all = get_enrolled_courses_by_timeline_classification::call(
         client,
         &mut get_enrolled_courses_by_timeline_classification::Params {
             classification: Some("all".to_string()),
             limit: None,
             offset: None,
-            sort: None,
+            sort: Some(String::from("id")),
             customfieldname: None,
             customfieldvalue: None,
             searchvalue: None,
         },
     )
-    .await;
+    .await
+    .unwrap();
 
-    let returns = result.unwrap();
-    let mut courses = returns.courses.unwrap();
-    courses.sort_by_key(|course| course.id);
+    // Get hidden courses
+    let res_hidden = get_enrolled_courses_by_timeline_classification::call(
+        client,
+        &mut get_enrolled_courses_by_timeline_classification::Params {
+            classification: Some("hidden".to_string()),
+            limit: None,
+            offset: None,
+            sort: Some(String::from("id")),
+            customfieldname: None,
+            customfieldvalue: None,
+            searchvalue: None,
+        },
+    )
+    .await
+    .unwrap();
+
+    let mut courses = res_hidden.courses.unwrap();
+    courses.append(&mut res_all.courses.unwrap());
 
     return Ok(courses);
 }
