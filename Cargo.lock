@@ -533,6 +533,7 @@ dependencies = [
  "anyhow",
  "clap",
  "moodle",
+ "serde_json",
  "tokio",
 ]
 

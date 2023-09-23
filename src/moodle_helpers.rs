@@ -56,6 +56,19 @@ pub async fn get_categories<'a>(client: &'a mut MoodleClient) -> anyhow::Result<
   .await
 }
 
+pub async fn get_category_by_id<'a>(
+  client: &'a mut MoodleClient,
+  category_id: String,
+) -> anyhow::Result<get_categories::Returns> {
+  let mut params: HashMap<String, String> = HashMap::new();
+  params.insert("criteria[0][key]".to_string(), "id".to_string());
+  params.insert("criteria[0][value]".to_string(), category_id.to_string());
+
+  let res = client.post("core_course_get_categories", &params).await?;
+
+  serde_json::from_value(res).map_err(|e| e.into())
+}
+
 pub async fn set_course_visibility<'a>(
   client: &'a mut MoodleClient,
   course_id: String,
