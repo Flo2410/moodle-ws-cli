@@ -79,7 +79,20 @@ async fn main() {
       }
 
       FunType::Hide(visibility_command) => {
-        println!("Hide grup: {}", visibility_command.id)
+        println!("Hide category: {}", visibility_command.id);
+
+        let courses = get_enrolled_courses(&mut client).await.unwrap();
+        let category = get_category_by_id(&mut client, visibility_command.id).await.unwrap();
+        let category_name = category.first().unwrap().name.as_ref().unwrap();
+
+        for course in courses {
+          if course.coursecategory.unwrap().eq(category_name) {
+            let res = set_course_visibility(&mut client, course.id.unwrap().to_string(), false).await;
+            if res.is_err() {
+              println!("Error!");
+            }
+          }
+        }
       }
 
       FunType::Show(visibility_command) => {
