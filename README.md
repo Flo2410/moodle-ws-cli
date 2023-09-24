@@ -4,7 +4,7 @@ It's a simple CLI for moodle written in Rust.
 
 ## How to use
 
-1. Download the current release for your OS from the [Release page](https://github.com/Flo2410/moodle-ws-cli/releases).
+1. Download the latest release for your OS from the [Release page](https://github.com/Flo2410/moodle-ws-cli/releases/latest).
 2. Run the tool from the terminal with
 
     ```bash
