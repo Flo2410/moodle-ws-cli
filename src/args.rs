@@ -1,6 +1,6 @@
 use clap::{Args, Parser, Subcommand};
 
-/// Simple porgram to change some moodle stuff.
+/// A simple CLI for moodle written in Rust.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct CliArgs {
@@ -8,15 +8,15 @@ pub struct CliArgs {
   #[clap(subcommand)]
   pub entity: EntityType,
 
-  /// Username to log in with
+  /// Your moodle username
   #[arg(short, long)]
   pub username: String,
 
-  /// Your password
+  /// Your moodle password
   #[arg(short, long)]
   pub password: String,
 
-  ///Moodle url
+  ///Moodle url (e.g. https://moodle.example.com)
   #[arg(long)]
   pub url: String,
 }
@@ -37,7 +37,7 @@ pub struct EntityArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum FunType {
-  /// List all courses
+  /// List all entries of the entity
   List,
   /// Show the entity
   Show(VisibilityCommand),
