@@ -2,6 +2,12 @@
 name = "moodle-ws-cli"
 version = "0.1.0"
 edition = "2021"
+authors = ["Florian Hye"]
+license = "GPLv3"
+readme = "README.md"
+repository = "https://github.com/Flo2410/moodle-ws-cli"
+description = "A simple CLI for moodle written in Rust."
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
