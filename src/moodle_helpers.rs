@@ -38,8 +38,8 @@ pub async fn get_enrolled_courses<'a>(
   .await
   .unwrap();
 
-  let mut courses = res_hidden.courses.unwrap();
-  courses.append(&mut res_all.courses.unwrap());
+  let mut courses = res_hidden.courses.unwrap_or_default();
+  courses.append(&mut res_all.courses.unwrap_or_default());
 
   return Ok(courses);
 }
